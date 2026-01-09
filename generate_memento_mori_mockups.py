@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate Memento Mori Garden t-shirt mockups with various color combinations
+FRONT ONLY - No back designs
 """
 
 import os
@@ -50,28 +51,21 @@ def create_tshirt_template(shirt_color, shirt_color_name):
   </g>
 </svg>'''
 
-def create_memento_mori_variant(design_colors, is_back=False):
-    """Create design in specified colors"""
+def create_memento_mori_variant(design_colors):
+    """Create design in specified colors - FRONT ONLY"""
     skull_color = design_colors['skull']
     flower_color = design_colors['flowers']
     accent_color = design_colors['accent']
     moon_color = design_colors['moon']
     text_color = design_colors['text']
 
-    # Back design is larger and centered higher
-    if is_back:
-        design_x = 400
-        design_y = 380
-        scale = 1.4
-        view_box = "0 0 800 1000"
-    else:
-        design_x = 400
-        design_y = 450
-        scale = 1.0
-        view_box = "0 0 800 1000"
+    # Front design - chest placement
+    design_x = 400
+    design_y = 450
+    scale = 1.0
 
     return f'''
-  <!-- Design placement ({"BACK" if is_back else "FRONT"}) -->
+  <!-- Design placement (FRONT - Chest) -->
   <g transform="translate({design_x}, {design_y}) scale({scale})">
     <!-- Moon phases arc (top) -->
     <g transform="translate(0, -120)">
@@ -312,23 +306,15 @@ color_combinations = {
     }
 }
 
-# Generate mockups for each color combination
+# Generate mockups for each color combination - FRONT ONLY
 for color_key, color_config in color_combinations.items():
-    # Front view
+    # Front view only
     front_svg = create_tshirt_template(color_config['shirt'], color_config['name'])
     front_svg = front_svg.replace('</svg>',
-                                  create_memento_mori_variant(color_config['design'], is_back=False) + '\n</svg>')
+                                  create_memento_mori_variant(color_config['design']) + '\n</svg>')
 
     with open(f"designs/mockups/memento_mori_{color_key}_front.svg", "w") as f:
         f.write(front_svg)
-
-    # Back view
-    back_svg = create_tshirt_template(color_config['shirt'], color_config['name'])
-    back_svg = back_svg.replace('</svg>',
-                                create_memento_mori_variant(color_config['design'], is_back=True) + '\n</svg>')
-
-    with open(f"designs/mockups/memento_mori_{color_key}_back.svg", "w") as f:
-        f.write(back_svg)
 
 # Create HTML viewer for all mockups
 html_content = '''<!DOCTYPE html>
@@ -382,7 +368,7 @@ html_content = '''<!DOCTYPE html>
         }
 
         .color-section {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto 60px;
             padding: 30px;
             background: rgba(44, 53, 57, 0.4);
@@ -419,9 +405,8 @@ html_content = '''<!DOCTYPE html>
         }
 
         .mockup-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            display: flex;
+            justify-content: center;
             margin-top: 20px;
         }
 
@@ -431,6 +416,7 @@ html_content = '''<!DOCTYPE html>
             padding: 20px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 600px;
         }
 
         .mockup-card:hover {
@@ -510,10 +496,6 @@ html_content = '''<!DOCTYPE html>
         }
 
         @media (max-width: 768px) {
-            .mockup-container {
-                grid-template-columns: 1fr;
-            }
-
             h1 {
                 font-size: 2em;
             }
@@ -523,13 +505,13 @@ html_content = '''<!DOCTYPE html>
 <body>
     <header>
         <h1>🌙 Memento Mori Garden 🌙</h1>
-        <p class="subtitle">T-Shirt Color Combinations & Mockups</p>
+        <p class="subtitle">T-Shirt Color Combinations</p>
     </header>
 
     <div class="intro">
         <p><strong>Design Concept:</strong> A hauntingly beautiful side-profile skull serves as a planter for wildflowers, embodying the phrase "from death, life blooms." This design blends anatomical accuracy with soft botanical elements, creating the perfect balance of gothic and cottage core aesthetics.</p>
         <br>
-        <p><strong>Print Placement:</strong> Front print (chest) at standard size, Back print (center back) at premium large size for maximum impact.</p>
+        <p><strong>Print Placement:</strong> Front chest print only (no back design) for a clean, classic look.</p>
     </div>
 '''
 
@@ -550,10 +532,6 @@ for color_key, color_config in color_combinations.items():
                 <h3>Front View</h3>
                 <img src="memento_mori_{color_key}_front.svg" alt="{color_config['name']} - Front">
             </div>
-            <div class="mockup-card">
-                <h3>Back View</h3>
-                <img src="memento_mori_{color_key}_back.svg" alt="{color_config['name']} - Back">
-            </div>
         </div>
     </div>
 '''
@@ -562,9 +540,8 @@ html_content += '''
     <div class="specs">
         <h2>🎨 Design Specifications</h2>
         <ul>
-            <li><strong>Design Type:</strong> Front & Back Print (Premium)</li>
-            <li><strong>Front Print Size:</strong> 10" x 12" (standard chest placement)</li>
-            <li><strong>Back Print Size:</strong> 12" x 14" (large center back placement)</li>
+            <li><strong>Design Type:</strong> Front Print Only</li>
+            <li><strong>Print Size:</strong> 10" x 12" (standard chest placement)</li>
             <li><strong>Colors per Design:</strong> 5-6 colors (multi-color print)</li>
             <li><strong>Recommended Print Method:</strong> Direct-to-Garment (DTG) for detail retention</li>
             <li><strong>File Format:</strong> SVG (scalable vector) - production ready</li>
@@ -575,17 +552,17 @@ html_content += '''
         <div class="pricing">
             <div class="price-card">
                 <h3>Standard Colors</h3>
-                <p class="price">$36-38</p>
+                <p class="price">$32-34</p>
                 <p style="margin-top: 10px; color: #ccc;">Black, Charcoal, Navy</p>
             </div>
             <div class="price-card">
                 <h3>Premium Colors</h3>
-                <p class="price">$38-40</p>
+                <p class="price">$34-36</p>
                 <p style="margin-top: 10px; color: #ccc;">Burgundy, Forest, Mauve</p>
             </div>
             <div class="price-card">
                 <h3>Specialty Colors</h3>
-                <p class="price">$40-42</p>
+                <p class="price">$36-38</p>
                 <p style="margin-top: 10px; color: #ccc;">Natural, Sage</p>
             </div>
         </div>
@@ -607,9 +584,10 @@ with open("designs/mockups/memento_mori_mockups.html", "w") as f:
     f.write(html_content)
 
 print("✓ Memento Mori Garden mockups created!")
-print(f"\n📁 Generated {len(color_combinations) * 2} mockup files:")
+print(f"\n📁 Generated {len(color_combinations)} mockup files (FRONT ONLY):")
 print("   - 8 color variations")
-print("   - Front and back views for each")
+print("   - Front view only (clean, classic look)")
+
 print("\n🎨 Color combinations:")
 for color_key, config in color_combinations.items():
     print(f"   - {config['name']}")

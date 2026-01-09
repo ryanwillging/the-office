@@ -37,7 +37,7 @@
     <line x1="650" y1="280" x2="600" y2="300" stroke="#333" stroke-width="0.5" opacity="0.3"/>
   </g>
 
-  <!-- Design placement (FRONT) -->
+  <!-- Design placement (FRONT - Chest) -->
   <g transform="translate(400, 450) scale(1.0)">
     <!-- Moon phases arc (top) -->
     <g transform="translate(0, -120)">

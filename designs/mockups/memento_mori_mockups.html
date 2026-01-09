@@ -49,7 +49,7 @@
         }
 
         .color-section {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto 60px;
             padding: 30px;
             background: rgba(44, 53, 57, 0.4);
@@ -86,9 +86,8 @@
         }
 
         .mockup-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            display: flex;
+            justify-content: center;
             margin-top: 20px;
         }
 
@@ -98,6 +97,7 @@
             padding: 20px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 600px;
         }
 
         .mockup-card:hover {
@@ -177,10 +177,6 @@
         }
 
         @media (max-width: 768px) {
-            .mockup-container {
-                grid-template-columns: 1fr;
-            }
-
             h1 {
                 font-size: 2em;
             }
@@ -190,13 +186,13 @@
 <body>
     <header>
         <h1>🌙 Memento Mori Garden 🌙</h1>
-        <p class="subtitle">T-Shirt Color Combinations & Mockups</p>
+        <p class="subtitle">T-Shirt Color Combinations</p>
     </header>
 
     <div class="intro">
         <p><strong>Design Concept:</strong> A hauntingly beautiful side-profile skull serves as a planter for wildflowers, embodying the phrase "from death, life blooms." This design blends anatomical accuracy with soft botanical elements, creating the perfect balance of gothic and cottage core aesthetics.</p>
         <br>
-        <p><strong>Print Placement:</strong> Front print (chest) at standard size, Back print (center back) at premium large size for maximum impact.</p>
+        <p><strong>Print Placement:</strong> Front chest print only (no back design) for a clean, classic look.</p>
     </div>
 
     <div class="color-section">
@@ -212,10 +208,6 @@
             <div class="mockup-card">
                 <h3>Front View</h3>
                 <img src="memento_mori_black_front.svg" alt="Midnight Garden (Black) - Front">
-            </div>
-            <div class="mockup-card">
-                <h3>Back View</h3>
-                <img src="memento_mori_black_back.svg" alt="Midnight Garden (Black) - Back">
             </div>
         </div>
     </div>
@@ -234,10 +226,6 @@
                 <h3>Front View</h3>
                 <img src="memento_mori_cream_front.svg" alt="Bone Garden (Natural) - Front">
             </div>
-            <div class="mockup-card">
-                <h3>Back View</h3>
-                <img src="memento_mori_cream_back.svg" alt="Bone Garden (Natural) - Back">
-            </div>
         </div>
     </div>
 
@@ -254,10 +242,6 @@
             <div class="mockup-card">
                 <h3>Front View</h3>
                 <img src="memento_mori_forest_front.svg" alt="Woodland Memento (Forest Green) - Front">
-            </div>
-            <div class="mockup-card">
-                <h3>Back View</h3>
-                <img src="memento_mori_forest_back.svg" alt="Woodland Memento (Forest Green) - Back">
             </div>
         </div>
     </div>
@@ -276,10 +260,6 @@
                 <h3>Front View</h3>
                 <img src="memento_mori_burgundy_front.svg" alt="Gothic Romance (Burgundy) - Front">
             </div>
-            <div class="mockup-card">
-                <h3>Back View</h3>
-                <img src="memento_mori_burgundy_back.svg" alt="Gothic Romance (Burgundy) - Back">
-            </div>
         </div>
     </div>
 
@@ -296,10 +276,6 @@
             <div class="mockup-card">
                 <h3>Front View</h3>
                 <img src="memento_mori_charcoal_front.svg" alt="Modern Memento (Charcoal) - Front">
-            </div>
-            <div class="mockup-card">
-                <h3>Back View</h3>
-                <img src="memento_mori_charcoal_back.svg" alt="Modern Memento (Charcoal) - Back">
             </div>
         </div>
     </div>
@@ -318,10 +294,6 @@
                 <h3>Front View</h3>
                 <img src="memento_mori_sage_front.svg" alt="Herbalist's Dream (Sage) - Front">
             </div>
-            <div class="mockup-card">
-                <h3>Back View</h3>
-                <img src="memento_mori_sage_back.svg" alt="Herbalist's Dream (Sage) - Back">
-            </div>
         </div>
     </div>
 
@@ -338,10 +310,6 @@
             <div class="mockup-card">
                 <h3>Front View</h3>
                 <img src="memento_mori_mauve_front.svg" alt="Twilight Bloom (Dusty Rose) - Front">
-            </div>
-            <div class="mockup-card">
-                <h3>Back View</h3>
-                <img src="memento_mori_mauve_back.svg" alt="Twilight Bloom (Dusty Rose) - Back">
             </div>
         </div>
     </div>
@@ -360,19 +328,14 @@
                 <h3>Front View</h3>
                 <img src="memento_mori_navy_front.svg" alt="Midnight Bloom (Navy) - Front">
             </div>
-            <div class="mockup-card">
-                <h3>Back View</h3>
-                <img src="memento_mori_navy_back.svg" alt="Midnight Bloom (Navy) - Back">
-            </div>
         </div>
     </div>
 
     <div class="specs">
         <h2>🎨 Design Specifications</h2>
         <ul>
-            <li><strong>Design Type:</strong> Front & Back Print (Premium)</li>
-            <li><strong>Front Print Size:</strong> 10" x 12" (standard chest placement)</li>
-            <li><strong>Back Print Size:</strong> 12" x 14" (large center back placement)</li>
+            <li><strong>Design Type:</strong> Front Print Only</li>
+            <li><strong>Print Size:</strong> 10" x 12" (standard chest placement)</li>
             <li><strong>Colors per Design:</strong> 5-6 colors (multi-color print)</li>
             <li><strong>Recommended Print Method:</strong> Direct-to-Garment (DTG) for detail retention</li>
             <li><strong>File Format:</strong> SVG (scalable vector) - production ready</li>
@@ -383,17 +346,17 @@
         <div class="pricing">
             <div class="price-card">
                 <h3>Standard Colors</h3>
-                <p class="price">$36-38</p>
+                <p class="price">$32-34</p>
                 <p style="margin-top: 10px; color: #ccc;">Black, Charcoal, Navy</p>
             </div>
             <div class="price-card">
                 <h3>Premium Colors</h3>
-                <p class="price">$38-40</p>
+                <p class="price">$34-36</p>
                 <p style="margin-top: 10px; color: #ccc;">Burgundy, Forest, Mauve</p>
             </div>
             <div class="price-card">
                 <h3>Specialty Colors</h3>
-                <p class="price">$40-42</p>
+                <p class="price">$36-38</p>
                 <p style="margin-top: 10px; color: #ccc;">Natural, Sage</p>
             </div>
         </div>
