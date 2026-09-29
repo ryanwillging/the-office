@@ -20,7 +20,7 @@ An **autonomous business system** that:
 ### 1. Install Dependencies
 
 ```bash
-cd "/Users/ryanwillging/claude projects/the-office"
+cd ~/"claude projects/the-office"
 pip install -r requirements.txt
 ```
 
