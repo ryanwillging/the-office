@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Office: Build-Measure-Learn Loop</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                fontSize: '18px',
+                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+            }
+        });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #F8F8F8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #2C3E50;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: #7F8C8D;
+        }
+
+        .diagram-container {
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏢 The Office: Autonomous Build-Measure-Learn Loop</h1>
+        <p>AI Agents Running Continuous Business Iteration</p>
+    </div>
+
+    <div class="diagram-container">
+        <div class="mermaid">
+            %%{init: {'theme':'base', 'themeVariables': { 'fontSize':'22px'}}}%%
+            flowchart TB
+                Ideas[💡 Ideas]
+                Build[("BUILD<br/>👥 CPO + ⚙️ CTO")]
+                Product[📦 Product]
+                Measure[("MEASURE<br/>⚙️ CTO + 👥 CPO")]
+                Data[📊 Data]
+                Learn[("LEARN<br/>📊 CEO + Team")]
+
+                Ideas -.->|Strategic<br/>Decision| Build
+                Build ==>|Execute &<br/>Create| Product
+                Product -.-> Measure
+                Measure ==>|Auto<br/>Collect| Data
+                Data -.-> Learn
+                Learn ==>|Analyze &<br/>Synthesize| Ideas
+
+                style Build fill:#3498DB,stroke:#2C3E50,stroke-width:4px,color:#fff,font-weight:bold
+                style Measure fill:#F1C40F,stroke:#2C3E50,stroke-width:4px,color:#2C3E50,font-weight:bold
+                style Learn fill:#2ECC71,stroke:#2C3E50,stroke-width:4px,color:#fff,font-weight:bold
+                style Ideas fill:#fff,stroke:#2C3E50,stroke-width:2px,color:#2C3E50,font-style:italic
+                style Product fill:#fff,stroke:#2C3E50,stroke-width:2px,color:#2C3E50,font-style:italic
+                style Data fill:#fff,stroke:#2C3E50,stroke-width:2px,color:#2C3E50,font-style:italic
+
+                classDef phaseClass font-size:20px
+                class Build,Measure,Learn phaseClass
+        </div>
+    </div>
+</body>
+</html>

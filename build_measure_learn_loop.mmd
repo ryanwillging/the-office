@@ -1,0 +1,25 @@
+%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'22px'}}}%%
+flowchart TB
+    Ideas[💡 Ideas]
+    Build[("BUILD<br/>👥 CPO + ⚙️ CTO")]
+    Product[📦 Product]
+    Measure[("MEASURE<br/>⚙️ CTO + 👥 CPO")]
+    Data[📊 Data]
+    Learn[("LEARN<br/>📊 CEO + Team")]
+
+    Ideas -.->|Strategic<br/>Decision| Build
+    Build ==>|Execute &<br/>Create| Product
+    Product -.-> Measure
+    Measure ==>|Auto<br/>Collect| Data
+    Data -.-> Learn
+    Learn ==>|Analyze &<br/>Synthesize| Ideas
+
+    style Build fill:#3498DB,stroke:#2C3E50,stroke-width:4px,color:#fff,font-weight:bold
+    style Measure fill:#F1C40F,stroke:#2C3E50,stroke-width:4px,color:#2C3E50,font-weight:bold
+    style Learn fill:#2ECC71,stroke:#2C3E50,stroke-width:4px,color:#fff,font-weight:bold
+    style Ideas fill:#fff,stroke:#2C3E50,stroke-width:2px,color:#2C3E50,font-style:italic
+    style Product fill:#fff,stroke:#2C3E50,stroke-width:2px,color:#2C3E50,font-style:italic
+    style Data fill:#fff,stroke:#2C3E50,stroke-width:2px,color:#2C3E50,font-style:italic
+
+    classDef phaseClass font-size:20px
+    class Build,Measure,Learn phaseClass

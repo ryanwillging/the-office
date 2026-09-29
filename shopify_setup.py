@@ -166,7 +166,7 @@ class ShopifyAPI:
                 json=image_payload
             )
 
-            if response.status_code == 201:
+            if response.status_code in [200, 201]:
                 print(f"  ✓ Uploaded image: {filename}")
                 return True
             else:
@@ -183,44 +183,55 @@ class GeminiAPI:
 
     def __init__(self):
         self.api_key = GEMINI_API_KEY
-        self.project_id = GEMINI_PROJECT_ID
-        # Using Imagen 3 for image generation
-        self.endpoint = f"https://us-central1-aiplatform.googleapis.com/v1/projects/{self.project_id}/locations/us-central1/publishers/google/models/imagen-3.0-generate-001:predict"
+        self.base_url = "https://generativelanguage.googleapis.com/v1beta"
 
     def test_connection(self) -> bool:
         """Test Gemini API connection"""
         try:
-            # Simple test request
-            print("✓ Gemini API key configured")
-            print(f"  Project ID: {self.project_id}")
-            print("  Using Imagen 3 for image generation")
-            return True
+            # Test with a simple text generation
+            url = f"{self.base_url}/models/gemini-2.0-flash:generateContent"
+            headers = {
+                "Content-Type": "application/json",
+                "X-goog-api-key": self.api_key
+            }
+            payload = {
+                "contents": [{"parts": [{"text": "Say hello"}]}]
+            }
+            response = requests.post(url, headers=headers, json=payload)
+            if response.status_code == 200:
+                print("✓ Gemini API connected")
+                print("  Using Imagen 4.0 for image generation")
+                return True
+            else:
+                print(f"✗ Gemini API error: {response.status_code}")
+                return False
         except Exception as e:
             print(f"✗ Gemini API error: {e}")
             return False
 
     def generate_image(self, prompt: str, output_path: str) -> bool:
-        """Generate an image using Gemini Imagen"""
+        """Generate an image using Imagen 4.0"""
         try:
-            # Note: Using the newer Gemini API endpoint
-            # We'll use the REST API for image generation
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:generate?key={self.api_key}"
-
+            url = f"{self.base_url}/models/imagen-4.0-generate-001:predict"
+            headers = {
+                "Content-Type": "application/json",
+                "X-goog-api-key": self.api_key
+            }
             payload = {
-                "prompt": prompt,
-                "number_of_images": 1,
-                "aspect_ratio": "1:1",
-                "safety_filter_level": "block_only_high",
-                "person_generation": "allow_adult"
+                "instances": [{"prompt": prompt}],
+                "parameters": {
+                    "sampleCount": 1,
+                    "aspectRatio": "1:1"
+                }
             }
 
-            response = requests.post(url, json=payload)
+            response = requests.post(url, headers=headers, json=payload)
 
             if response.status_code == 200:
                 result = response.json()
                 # The API returns base64 encoded images
-                if 'generatedImages' in result and len(result['generatedImages']) > 0:
-                    image_data = base64.b64decode(result['generatedImages'][0]['bytesBase64Encoded'])
+                if 'predictions' in result and len(result['predictions']) > 0:
+                    image_data = base64.b64decode(result['predictions'][0]['bytesBase64Encoded'])
                     with open(output_path, 'wb') as f:
                         f.write(image_data)
                     print(f"  ✓ Generated image: {output_path}")
@@ -230,7 +241,7 @@ class GeminiAPI:
                     return False
             else:
                 print(f"  ✗ Image generation failed: {response.status_code}")
-                print(f"    Response: {response.text}")
+                print(f"    Response: {response.text[:200]}")
                 return False
         except Exception as e:
             print(f"  ✗ Error generating image: {e}")
